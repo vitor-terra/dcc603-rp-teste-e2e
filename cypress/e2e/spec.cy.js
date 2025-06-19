@@ -77,7 +77,6 @@ describe('TODOMvc App', () => {
 
     cy.get('.view > label')
       .dblclick();
-      //.pause();
 
     cy.get('.edit')
       .type('{selectall}Uma coisa diferente{enter}');
@@ -87,6 +86,31 @@ describe('TODOMvc App', () => {
       .should('have.length', 1) 
       .first()
       .should('have.text', 'Uma coisa diferente');
+  });
+
+  it('Cria, completa e limpa uma tarefa', () => {
+    cy.visit(''); 
+
+    cy.get('[data-cy=todo-input]')
+      .type('TP2 de Engenharia de Software{enter}');
+
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 1)
+      .first()
+      .should('have.text', 'TP2 de Engenharia de Software');
+
+    cy.get('[data-cy=todos-list] > li [data-cy=toggle-todo-checkbox]')
+      .first()
+      .click();
+    
+    cy.get('.clear-completed')
+      .click();
+
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 0)
+
   });
 
 });
