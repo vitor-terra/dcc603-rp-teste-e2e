@@ -113,4 +113,34 @@ describe('TODOMvc App', () => {
 
   });
 
+  it('Cria várias tarefas, completa pelo botão lateral e limpa todas elas', () => {
+    cy.visit('');
+
+    cy.get('[data-cy=todo-input]')
+      .type('Tarefa1{enter}');
+
+    cy.get('[data-cy=todo-input]')
+      .type('Tarefa2{enter}');
+
+    cy.get('[data-cy=todo-input]')
+      .type('Tarefa3{enter}');
+
+    cy.get('[data-cy=todo-input]')
+      .type('Tarefa4{enter}');
+
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 4)
+
+    cy.get('.toggle-all-label')
+      .click()
+
+    cy.get('.clear-completed')
+      .click();
+
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 0)
+  });
+
 });
