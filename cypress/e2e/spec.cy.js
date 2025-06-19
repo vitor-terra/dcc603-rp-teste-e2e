@@ -68,4 +68,25 @@ describe('TODOMvc App', () => {
       .children()
       .should('have.length', 2);
   });
+
+  it('Cria e edita tarefa', () => {
+    cy.visit('');
+
+    cy.get('[data-cy=todo-input]')
+      .type('TP2 de Engenharia de Softwar{enter}');
+
+    cy.get('.view > label')
+      .dblclick();
+      //.pause();
+
+    cy.get('.edit')
+      .type('{selectall}Uma coisa diferente{enter}');
+
+    cy.get('[data-cy=todos-list]')
+      .children()
+      .should('have.length', 1) 
+      .first()
+      .should('have.text', 'Uma coisa diferente');
+  });
+
 });
